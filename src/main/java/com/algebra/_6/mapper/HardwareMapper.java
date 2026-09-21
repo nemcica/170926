@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class HardwareMapper {
 
     public HardwareDto toDto(Hardware hardware) {
-        if(hardware == null) return null;
+        if (hardware == null) return null;
 
         HardwareDto hardwareDto = new HardwareDto();
         hardwareDto.setName(hardware.getName());
@@ -20,7 +20,7 @@ public class HardwareMapper {
     }
 
     public Hardware toEntity(HardwareDto hardwareDto) {
-        if(hardwareDto == null) return  null;
+        if (hardwareDto == null) return null;
 
         Hardware hardware = new Hardware();
         hardware.setName(hardwareDto.getName());

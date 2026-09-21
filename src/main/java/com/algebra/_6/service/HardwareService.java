@@ -13,5 +13,8 @@ public interface HardwareService {
 
     Optional<HardwareDto> findOne(String code);
 
+    boolean exists(String code);
+
+    void delete(String code);
 }
 

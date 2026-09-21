@@ -36,5 +36,15 @@ public class HardwareServiceImpl implements HardwareService {
         Optional<Hardware> foundHardware = hardwareRepository.findByCode(code);
         return foundHardware.map(hardware -> hardwareMapper.toDto(hardware));
     }
+
+    @Override
+    public boolean exists(String code) {
+        return hardwareRepository.existsById(code);
+    }
+
+    @Override
+    public void delete(String code) {
+        hardwareRepository.deleteById(code);
+    }
 }
 
