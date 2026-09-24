@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 @Data
 public class HardwareDto {
 
+    private Long id;
+
     @NotBlank(message = "Name is required.")
     private String name;
 

@@ -3,7 +3,7 @@ package com.algebra._6.service.impl;
 import com.algebra._6.domain.Hardware;
 import com.algebra._6.dto.HardwareDto;
 import com.algebra._6.mapper.HardwareMapper;
-import com.algebra._6.repository.HardwareRepository;
+//import com.algebra._6.repository.HardwareRepository;
 import com.algebra._6.repository.JdbcHardwareRepository;
 import com.algebra._6.service.HardwareService;
 import lombok.AllArgsConstructor;

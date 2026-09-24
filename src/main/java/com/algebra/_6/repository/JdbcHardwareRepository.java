@@ -21,16 +21,19 @@ public class JdbcHardwareRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public Hardware save(Hardware hardware) {
-        String sql = "INSERT INTO HARDWARE (NAME, CODE, PRICE, TYPE, AMOUNT) VALUES (?, ?, ?, ?, ?)";
+        String sql = "SELECT ID FROM FINAL TABLE (INSERT INTO HARDWARE (NAME, CODE, PRICE, TYPE, AMOUNT) VALUES (?, ?, ?, ?, ?)) HARDWARE ";
 
-        jdbcTemplate.update(
+        Long id = jdbcTemplate.queryForObject(
                 sql,
+                Long.class,
                 hardware.getName(),
                 hardware.getCode(),
                 hardware.getPrice(),
                 hardware.getType().name(),
                 hardware.getAmount()
         );
+
+        hardware.setId(id);
 
         return hardware;
     }
@@ -44,8 +47,10 @@ public class JdbcHardwareRepository {
                 hardware.getPrice(),
                 hardware.getType().name(),
                 hardware.getAmount(),
-                hardware.getCode()
+                code
         );
+
+        hardware.setCode(code);
 
         return hardware;
     }
@@ -60,7 +65,12 @@ public class JdbcHardwareRepository {
         String sql = "SELECT * FROM HARDWARE WHERE CODE = ?";
 
         try {
-            Hardware hardware = jdbcTemplate.queryForObject(sql, new HardwareRowMapper(), code);
+            Hardware hardware =
+                    jdbcTemplate.queryForObject(
+                            sql,
+                            new HardwareRowMapper(),
+                            code
+                    );
 
             return Optional.ofNullable(hardware);
         } catch (EmptyResultDataAccessException e) {
@@ -91,6 +101,7 @@ public class JdbcHardwareRepository {
         public Hardware mapRow(ResultSet rs, int i) throws SQLException {
             Hardware hardware = new Hardware();
 
+            hardware.setId(rs.getLong("ID"));
             hardware.setName(rs.getString("NAME"));
             hardware.setCode(rs.getString("CODE"));
             hardware.setPrice(rs.getBigDecimal("PRICE"));
