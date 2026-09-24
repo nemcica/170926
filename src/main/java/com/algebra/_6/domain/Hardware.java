@@ -1,6 +1,8 @@
 package com.algebra._6.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +19,7 @@ public class Hardware {
     @Id
     private String code;
     private BigDecimal price;
+    @Enumerated(EnumType.STRING)
     private Type type;
     private int amount;
 

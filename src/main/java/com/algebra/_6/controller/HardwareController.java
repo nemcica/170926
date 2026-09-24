@@ -31,7 +31,7 @@ public class HardwareController {
         }
 
         hardwareDto.setCode(code);
-        HardwareDto savedHardware = hardwareService.save(hardwareDto);
+        HardwareDto savedHardware = hardwareService.save(code, hardwareDto);
         return ResponseEntity.ok(savedHardware);
     }
 
